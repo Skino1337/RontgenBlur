@@ -1,5 +1,6 @@
 '''RontgenBlur by Skino'''
-'''Version 0.1'''
+'''Version 0.1.1'''
+
 
 import BigWorld
 import ResMgr
@@ -9,21 +10,18 @@ from ProjectileMover import collideDynamicAndStatic
 
 
 g_isFullBlur = True
-g_distToBlur = 50.0
-g_disAngleToBlur = 200.00
-g_dirAngleToBlur = 15.0
+g_distToBlur = 50
+g_disAngleToBlur = 200
+g_dirAngleToBlur = 15
 g_isAllyBlur = True
 g_isEnemyBlur = True
 
 
 def isInAngle(vehiclePos):
-	camToDir = (BigWorld.player().inputHandler.ctrl.camera.aimingSystem.getThirdPersonShotPoint() - BigWorld.camera().position)
-	camToDir.normalise()
-	
 	camToVeh = (vehiclePos - BigWorld.camera().position)
 	camToVeh.normalise()
 	
-	angle = math.acos(camToDir.x * camToVeh.x + camToDir.y * camToVeh.y + camToDir.z * camToVeh.z)
+	angle = math.acos(camToVeh.dot(BigWorld.camera().direction))
 	
 	return angle < g_dirAngleToBlur
 
@@ -61,7 +59,7 @@ def ModCallBack():
 					BigWorld.wgDelEdgeDetectEntity(vehicle)
 					continue
 			
-			if g_isFullBlur and isRayAtVehicle(BigWorld.camera().position, vehicle.position):
+			if g_isFullBlur and isRayAtVehicle(BigWorld.camera().position, vehicle.appearance.modelsDesc['gun']['model'].position):
 				BigWorld.wgDelEdgeDetectEntity(vehicle)
 				continue
 			
@@ -75,23 +73,23 @@ def ModCallBack():
 def init():
 	global g_distToBlur, g_isFullBlur, g_dirAngleToBlur, g_disAngleToBlur, g_isAllyBlur, g_isEnemyBlur
 	
-	print '[RontgenBlur] Version: 0.1 by Skino88'
+	print '[RontgenBlur] Version: 0.1.1 by Skino'
 	
 	xml = ResMgr.openSection('scripts/client/gui/mods/mod_RontgenBlur.xml')
 	if xml:
 		g_isFullBlur = xml.readBool('fullBlur', g_isFullBlur)
 		
-		g_distToBlur = xml.readFloat('distanseToBlur', g_distToBlur)
-		g_distToBlur = min(400.0, g_distToBlur)
-		g_distToBlur = max(0.0, g_distToBlur)
+		g_distToBlur = xml.readInt('distanseToBlur', g_distToBlur)
+		g_distToBlur = min(400, g_distToBlur)
+		g_distToBlur = max(0, g_distToBlur)
 		
-		g_disAngleToBlur = xml.readFloat('disAngleToBlur', g_disAngleToBlur)
-		g_disAngleToBlur = min(400.0, g_disAngleToBlur)
-		g_disAngleToBlur = max(0.0, g_disAngleToBlur)
+		g_disAngleToBlur = xml.readInt('disAngleToBlur', g_disAngleToBlur)
+		g_disAngleToBlur = min(400, g_disAngleToBlur)
+		g_disAngleToBlur = max(0, g_disAngleToBlur)
 		
-		g_dirAngleToBlur = xml.readFloat('dirAngleToBlur', g_dirAngleToBlur)
-		g_dirAngleToBlur = min(90.0, g_dirAngleToBlur)
-		g_dirAngleToBlur = max(10.0, g_dirAngleToBlur)
+		g_dirAngleToBlur = xml.readInt('dirAngleToBlur', g_dirAngleToBlur)
+		g_dirAngleToBlur = min(90, g_dirAngleToBlur)
+		g_dirAngleToBlur = max(10, g_dirAngleToBlur)
 		
 		vehicleTypeToBlur = xml.readString('vehicleTypeToBlur', 'ally, enemy')
 		vehicleTypeToBlur.lower()
