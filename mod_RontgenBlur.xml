@@ -1,0 +1,21 @@
+<RontgenBlurSetting>
+	
+    <!-- Автор: Skino -->
+	<!-- Официальная тема: http://www.rf-cheats.ru/forum/showthread.php?p=2314774 -->
+	
+	<!-- Тип подсветки, если true - то полный подсветка, если false - то частичная подсветка. -->
+	<fullBlur>true</fullBlur>
+	
+	<!-- Максимальная дальность подсветки. (0 - 400) -->
+	<distanseToBlur>50</distanseToBlur>
+	
+	<!-- Максимальная дальность подсветки в определенном угле обзора. (0 - 400) -->
+	<disAngleToBlur>200</disAngleToBlur>
+	
+	<!-- Угол обзора для подсветки. (10 - 90) -->
+	<dirAngleToBlur>15</dirAngleToBlur>
+	
+	<!-- Командная принадлежность подсвечиваемой техники, перечисление. (ally, enemy) -->
+	<vehicleTypeToBlur>ally, enemy</vehicleTypeToBlur>
+	
+</RontgenBlurSetting>
