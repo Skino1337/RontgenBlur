@@ -7,7 +7,7 @@
 	<fullBlur>true</fullBlur>
 	
 	<!-- Максимальная дальность подсветки техники. (0 - 400) -->
-	<distanseToBlur>50</distanseToBlur>
+	<distanceToBlur>50</distanceToBlur>
 	
 	<!-- Максимальная дальность подсветки техники в определенном угле обзора. (0 - 400) -->
 	<disAngleToBlur>200</disAngleToBlur>
