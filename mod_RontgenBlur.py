@@ -1,5 +1,5 @@
 '''RontgenBlur by Skino'''
-'''Version 0.2.1'''
+'''Version 0.2.2'''
 
 
 import BigWorld
@@ -79,8 +79,8 @@ def ModCallBack():
 				continue
 			
 			distToVeh = (BigWorld.camera().position - vehicle.position).length
-			if distToVeh > g_modSetting['distanceToBlur'] and g_modSetting['disAngleToBlur'] > g_modSetting['distanceToBlur']:
-				if not isInAngle(vehicle.position):
+			if distToVeh > g_modSetting['distanceToBlur']:
+				if not isInAngle(vehicle.position) or distToVeh > g_modSetting['disAngleToBlur']:
 					vehicle.removeEdge()
 					continue
 			
@@ -97,7 +97,7 @@ def ModCallBack():
 def delayInit():
 	global g_modSetting
 	
-	print '[RontgenBlur] Version 0.2.1 by Skino'
+	print '[RontgenBlur] Version 0.2.2 by Skino'
 	
 	xml = ResMgr.openSection('scripts/client/gui/mods/mod_RontgenBlur.xml')
 	if xml:
