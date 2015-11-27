@@ -1,5 +1,5 @@
 '''RontgenBlur by Skino'''
-'''Version 0.2.2'''
+'''Version 0.2.3'''
 
 
 import BigWorld
@@ -97,7 +97,7 @@ def ModCallBack():
 def delayInit():
 	global g_modSetting
 	
-	print '[RontgenBlur] Version 0.2.2 by Skino'
+	print '[RontgenBlur] Version 0.2.3 by Skino'
 	
 	xml = ResMgr.openSection('scripts/client/gui/mods/mod_RontgenBlur.xml')
 	if xml:
@@ -112,7 +112,7 @@ def delayInit():
 		g_modSetting['isCustomColors'] = xml.readBool('customColors', g_modSetting['isCustomColors'])
 		if g_modSetting['isCustomColors']:
 			for type in g_modSetting['customColors']:
-				g_modSetting['customColors'][type] = xml.readVector4('closed' if type == 'flag' else type + 'Color', g_modSetting['customColors'][type])
+				g_modSetting['customColors'][type] = xml.readVector4(('closed' if type == 'flag' else type) + 'Color', g_modSetting['customColors'][type])
 	else:
 		print '[RontgenBlur] Unable to load scripts/client/gui/mods/mod_RontgenBlur.xml, load default values.'
 	
@@ -127,6 +127,7 @@ def delayInit():
 				colors[s][t].z = max(0, min(255, g_modSetting['customColors'][t].z)) / 255.0
 				colors[s][t].w = max(0, min(255, g_modSetting['customColors'][t].w)) / 255.0
 		EdgeDetectColorController.g_instance._EdgeDetectColorController__colors = colors
+		EdgeDetectColorController.g_instance.updateColors()
 	
 	BigWorld.callback(2, ModCallBack)
 	
